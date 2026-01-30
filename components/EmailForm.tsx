@@ -4,6 +4,7 @@ import { Send, Calendar, CheckCircle2 } from 'lucide-react';
 
 const EmailForm: React.FC = () => {
   const [email, setEmail] = useState('');
+  const [isTester, setIsTester] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -29,12 +30,16 @@ const EmailForm: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email: email }),
+        body: JSON.stringify({ 
+          email: email,
+          type: isTester ? 'tester' : 'user'
+        }),
       });
 
       // no-cors 모드에서는 응답 내용을 읽을 수 없으므로 성공으로 간주하고 진행합니다.
       setSubmitted(true);
       setEmail('');
+      setIsTester(false);
     } catch (err) {
       console.error('Submission error:', err);
       setError('죄송합니다. 오류가 발생했습니다. 다시 시도해 주세요.');
@@ -79,6 +84,23 @@ const EmailForm: React.FC = () => {
             className="w-full bg-[#1A1924]/80 border border-white/10 rounded-2xl px-6 py-5 outline-none focus:border-[#5CA6CE] focus:ring-4 focus:ring-[#5CA6CE]/10 transition-all text-white placeholder:text-gray-500 text-lg shadow-2xl backdrop-blur-sm"
           />
         </div>
+
+        {/* Checkbox for Tester Participation */}
+        <label className="flex items-center gap-3 px-2 cursor-pointer group">
+          <div className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${isTester ? 'bg-[#5CA6CE] border-[#5CA6CE]' : 'border-white/20 group-hover:border-[#5CA6CE]/50'}`}>
+            {isTester && <CheckCircle2 size={14} className="text-white" />}
+          </div>
+          <input 
+            type="checkbox" 
+            checked={isTester}
+            onChange={(e) => setIsTester(e.target.checked)}
+            className="hidden"
+          />
+          <span className={`text-sm transition-colors ${isTester ? 'text-[#5CA6CE] font-bold' : 'text-gray-400 group-hover:text-gray-300'}`}>
+            테스터 참여에도 관심이 있습니다
+          </span>
+        </label>
+
         {error && <p className="text-red-400 text-xs px-2">{error}</p>}
         <button
           type="submit"
