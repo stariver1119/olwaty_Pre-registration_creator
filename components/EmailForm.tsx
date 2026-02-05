@@ -30,7 +30,7 @@ const EmailForm: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           email: email,
           type: isTester ? 'tester' : 'user'
         }),
@@ -78,7 +78,7 @@ const EmailForm: React.FC = () => {
           <input
             type="email"
             required
-            placeholder="이메일 입력하고 사전 혜택 받기"
+            placeholder="이메일 입력하고 사전 신청하기"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full bg-[#1A1924]/80 border border-white/10 rounded-2xl px-6 py-5 outline-none focus:border-[#5CA6CE] focus:ring-4 focus:ring-[#5CA6CE]/10 transition-all text-white placeholder:text-gray-500 text-lg shadow-2xl backdrop-blur-sm"
@@ -90,8 +90,8 @@ const EmailForm: React.FC = () => {
           <div className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${isTester ? 'bg-[#5CA6CE] border-[#5CA6CE]' : 'border-white/20 group-hover:border-[#5CA6CE]/50'}`}>
             {isTester && <CheckCircle2 size={14} className="text-white" />}
           </div>
-          <input 
-            type="checkbox" 
+          <input
+            type="checkbox"
             checked={isTester}
             onChange={(e) => setIsTester(e.target.checked)}
             className="hidden"

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Star, List, Layout } from 'lucide-react';
+import { Star, List, Layout, Banknote } from 'lucide-react';
 import { Feature, PainPoint } from './types';
 
 export const COLORS = {
@@ -15,35 +15,35 @@ export const COLORS = {
 export const PAIN_POINTS: PainPoint[] = [
   {
     id: "상황 1",
-    scenario: "내가 구독한 크리에이터, 왜 피드에 안 뜨죠?",
-    content: "알고리즘에 밀려 정작 내가 좋아하는 사람을 보기 어려워요..! 매번 검색해서 찾아 들어가는 피로함을 올와치가 해결합니다."
+    scenario: "구독은 약속입니다, 지켜져야 합니다",
+    content: "진짜 팬은 별로인 영상도 직접 보고 판단하고 싶어해요. 근데 알고리즘에 밀려서 영상이 올라온 줄도 몰라요."
   },
   {
     id: "상황 2",
-    scenario: "정주행 방해꾼, '추천 영상'의 유혹",
-    content: "시리즈 영상을 쭉 보고 싶은데 자꾸만 다른 주제의 영상을 추천하나요? 올와치에선 알고리즘 없이, 오직 선택한 시리즈에만 몰입할 수 있습니다."
+    scenario: "팬이 있는데 썸네일 무한 경쟁은 불필요합니다",
+    content: "내용보다 썸네일로 먼저 이겨야 하는 구조, 지치지 않으셨나요?"
   },
   {
     id: "상황 3",
-    scenario: "열 때마다 어지러운 무한 추천의 늪",
-    content: "앱을 열자마자 쏟아지는 자극적인 썸네일들 사이에서 길을 잃으신 적 있나요? 내가 고른 사람들로만 채워진 깨끗한 홈 화면을 경험해 보세요."
+    scenario: "좋은 영상은 다시 찾기 쉬워야 합니다",
+    content: "정주행하고 싶은 팬도 있어요. 근데 알고리즘 구조에선 과거 영상이 묻히고, 다시 찾아오기가 어렵습니다."
   }
 ];
 
 export const FEATURES: Feature[] = [
   {
     title: "상단 고정석 5개",
-    description: "가장 소중한 크리에이터 5명을 고정하세요. 새 영상이 올라오면 알고리즘을 거치지 않고 가장 먼저 뜹니다.",
+    description: "시청자 홈에서 가장 소중한 크리에이터 5명을 고정합니다. 찐팬들이 고정을 한다면 노출도 100%",
     icon: <Star className="text-[#5CA6CE]" size={24} />
   },
   {
-    title: "순수 구독 리스트",
-    description: "알고리즘의 간섭 없이 내가 구독한 크리에이터만 최신순으로 정렬됩니다. 스크롤만 내리면 끝나요.",
+    title: "시리즈 기반 리스트",
+    description: "영상들이 시리즈별로 묶여 있고, 각 개별 영상을 설명하는 텍스트가 추가되어 썸네일 경쟁이 필요 없습니다.",
     icon: <List className="text-[#5CA6CE]" size={24} />
   },
   {
-    title: "시리즈 자동 정리",
-    description: "영상들이 시리즈별로 묶여 있어 '어디까지 봤지?' 고민할 필요가 없습니다. 다음 화로 바로 연결됩니다.",
+    title: "내 의도대로 재생목록 정리",
+    description: "유튜브 영상을 쉽게 가져오고 내 의도대로 1,2,3화 이어지는 시리즈로 정리해서, 팬이 정주행하기 쉬워집니다.",
     icon: <Layout className="text-[#5CA6CE]" size={24} />
   }
 ];

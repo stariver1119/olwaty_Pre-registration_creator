@@ -2,7 +2,7 @@
 import React from 'react';
 import { COLORS, PAIN_POINTS, FEATURES } from './constants';
 import EmailForm from './components/EmailForm';
-import { ArrowDown, Play, Sparkles, Star } from 'lucide-react';
+import { ArrowDown, Play, Sparkles, Star, Banknote } from 'lucide-react';
 
 const App: React.FC = () => {
   return (
@@ -85,17 +85,17 @@ const App: React.FC = () => {
 
             {/* Floating Badge */}
             <div className="absolute -bottom-4 right-4 bg-gradient-to-r from-[#5CA6CE] to-[#5A5B9F] text-white px-4 py-2 rounded-2xl text-[9px] font-black shadow-2xl tracking-[0.2em] uppercase border border-white/10">
-              Live Prototype
+              Prototype
             </div>
           </div>
 
           {/* Main Headings */}
           <h1 className="text-[32px] font-black tracking-tight mb-6 text-glow leading-[1.2] bg-clip-text text-transparent bg-gradient-to-r from-[#5CA6CE] to-[#A0D4F0]">
-            내가 고른 사람을<br />가장 편하게 보는 곳
+            팬과 진짜로 연결되는 순간
           </h1>
 
           <p className="text-gray-400 font-bold text-base tracking-widest mb-12 uppercase">
-            올와치 <span className="mx-2 opacity-30">|</span> OlWATY
+            올와티 <span className="mx-2 opacity-30">|</span> OlWATY
           </p>
 
           <EmailForm />
@@ -109,7 +109,7 @@ const App: React.FC = () => {
         <section className="px-6 py-16 relative z-10">
           <div className="flex flex-col items-center mb-12">
             <div className="bg-[#5A5B9F]/20 text-[#5A5B9F] px-4 py-1.5 rounded-full text-[10px] font-bold tracking-[0.2em] mb-4 border border-[#5A5B9F]/20 uppercase">Points</div>
-            <h2 className="text-3xl font-black text-white leading-tight">혹시 이런 상황인가요?</h2>
+            <h2 className="text-3xl font-black text-white leading-tight">왜 팬에게 안 닿을까요</h2>
           </div>
 
           <div className="space-y-6">
@@ -138,8 +138,8 @@ const App: React.FC = () => {
           <div className="relative z-10">
             <Sparkles className="mx-auto mb-6 text-[#5CA6CE] opacity-60" size={32} />
             <h2 className="text-2xl font-black text-white mb-6 leading-snug">
-              알고리즘의 선택이 아닌,<br />
-              <span className="text-[#5CA6CE]">직접 고른 선택</span>에 집중합니다.
+              시청자가<br />
+              <span className="text-[#5CA6CE]"> 진짜 팬</span>이 되는 순간
             </h2>
             <div className="h-0.5 w-12 bg-gradient-to-r from-transparent via-[#5CA6CE] to-transparent mx-auto" />
           </div>
@@ -151,7 +151,7 @@ const App: React.FC = () => {
 
           <div className="flex flex-col items-center mb-16">
             <div className="bg-[#5CA6CE]/20 text-[#5CA6CE] px-4 py-1.5 rounded-full text-[10px] font-bold tracking-[0.2em] mb-4 border border-[#5CA6CE]/20 uppercase">Solution</div>
-            <h2 className="text-3xl font-black text-white">올와치만의 경험</h2>
+            <h2 className="text-3xl font-black text-white">올와티의 접근법</h2>
           </div>
 
           <div className="space-y-12 mb-10">
@@ -171,12 +171,14 @@ const App: React.FC = () => {
           {/* Bottom Visual - simplified since we moved the big one to the top */}
           <div className="mt-20 p-8 rounded-[40px] bg-white/[0.02] border border-white/5 text-center">
             <div className="w-16 h-16 bg-[#5CA6CE]/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
-              <Star size={32} className="text-[#5CA6CE]" />
+              <Banknote size={32} className="text-[#5CA6CE]" />
             </div>
-            <p className="text-gray-400 font-medium leading-relaxed">
-              이제 당신의 피드를 직접 컨트롤하세요.<br />
-              진짜 보고 싶은 영상은 놓치지 않도록.
-            </p>
+            <h3 className="text-xl font-bold text-white mb-3">기존 수익 유지, 추가 수익화도 가능</h3>
+            <div className="text-gray-400 font-medium leading-relaxed flex flex-col gap-2">
+              <p>*임베드 재생도 크리에이터 수익에 포함됩니다.</p>
+              <p className="text-xs opacity-50">(자체 수익화 기능은 올해 중반 출시 예정)</p>
+              <p className="text-[#5CA6CE] font-bold mt-1">테스터부터 올와티 미리보기 수익화 기능 사용가능</p>
+            </div>
           </div>
         </section>
 
@@ -185,16 +187,17 @@ const App: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-[#263056]/40 via-transparent to-transparent pointer-events-none" />
 
           <div className="relative z-10 flex flex-col items-center">
-            <p className="text-[#5A5B9F] font-black text-sm tracking-[0.3em] uppercase mb-6">Ending Algorithm Chaos</p>
-            <h2 className="text-[32px] font-black text-white mb-8 leading-[1.2]">
-              <span className="text-[#5CA6CE] text-glow">내가 고른 사람</span>을<br />가장 편하게 보는 곳<br />올와치
+            <p className="text-[#5A5B9F] font-black text-[10px] tracking-[0.4em] uppercase mb-4 opacity-80">When True Fans Connect</p>
+            <h2 className="text-2xl font-black text-white mb-10 leading-[1.3] tracking-tight">
+              팬과<span className="text-[#5CA6CE] text-glow"> 진짜로 </span>연결되는 순간<br />
+              <span className="block mt-3 text-4xl bg-clip-text text-transparent bg-gradient-to-r from-[#5CA6CE] to-[#A0D4F0]">올와티  OlWATY</span>
             </h2>
 
             <div className="w-12 h-1 bg-gradient-to-r from-transparent via-[#5CA6CE]/40 to-transparent mb-12" />
 
             <p className="text-gray-200 text-lg mb-12 font-semibold">
               2026년, 곧 만나요.<br />
-              <span className="text-gray-400 font-normal text-base mt-2 block">런칭 알림을 예약하고 사전 혜택을 받으세요.</span>
+              <span className="text-gray-400 font-normal text-base mt-2 block">런칭 알림을 예약하세요.</span>
             </p>
 
             <EmailForm />
@@ -209,7 +212,7 @@ const App: React.FC = () => {
             <span className="hover:text-[#5CA6CE] cursor-pointer transition-colors">CONTACT</span>
           </div>
           <p className="text-[11px] text-gray-600 font-medium mb-1.5">© 2026 OLWaty Inc. All rights reserved.</p>
-          <p className="text-[10px] text-gray-700 tracking-wide font-light italic">Premium Curation Service for Modern Viewers.</p>
+          <p className="text-[10px] text-gray-700 tracking-wide font-light italic">Premium Curation Service for Creators.</p>
         </footer>
 
         {/* Floating Indicator */}
