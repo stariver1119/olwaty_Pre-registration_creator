@@ -2,7 +2,11 @@
 import React, { useState } from 'react';
 import { Send, Calendar, CheckCircle2 } from 'lucide-react';
 
-const EmailForm: React.FC = () => {
+interface EmailFormProps {
+  enhanced?: boolean;
+}
+
+const EmailForm: React.FC<EmailFormProps> = ({ enhanced = false }) => {
   const [email, setEmail] = useState('');
   const [isTester, setIsTester] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -50,7 +54,7 @@ const EmailForm: React.FC = () => {
 
   if (submitted) {
     return (
-      <div className="w-full max-w-sm bg-[#263056]/40 border border-[#5CA6CE]/40 rounded-3xl p-8 text-center animate-in fade-in zoom-in duration-500 backdrop-blur-md">
+      <div className={`w-full max-w-sm bg-[#263056]/40 border border-[#5CA6CE]/40 rounded-3xl p-8 text-center animate-in fade-in zoom-in duration-500 backdrop-blur-md ${enhanced ? 'animate-success-ripple' : ''}`}>
         <div className="w-12 h-12 bg-[#5CA6CE]/20 rounded-full flex items-center justify-center mx-auto mb-4">
           <CheckCircle2 size={24} className="text-[#5CA6CE]" />
         </div>
@@ -75,13 +79,16 @@ const EmailForm: React.FC = () => {
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
         <div className="relative group">
+          {enhanced && (
+            <div className="absolute inset-0 rounded-2xl border border-[#5CA6CE]/20 pointer-events-none animate-input-sweep" />
+          )}
           <input
             type="email"
             required
             placeholder="이메일 입력하고 사전 신청하기"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full bg-[#1A1924]/80 border border-white/10 rounded-2xl px-6 py-5 outline-none focus:border-[#5CA6CE] focus:ring-4 focus:ring-[#5CA6CE]/10 transition-all text-white placeholder:text-gray-500 text-lg shadow-2xl backdrop-blur-sm"
+            className={`w-full bg-[#1A1924]/80 border border-white/10 rounded-2xl px-6 py-5 outline-none focus:border-[#5CA6CE] focus:ring-4 focus:ring-[#5CA6CE]/10 transition-all text-white placeholder:text-gray-500 text-lg shadow-2xl backdrop-blur-sm ${enhanced ? 'animate-input-glow focus:shadow-[0_0_0_6px_rgba(92,166,206,0.12)]' : ''}`}
           />
         </div>
 
@@ -105,7 +112,7 @@ const EmailForm: React.FC = () => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-gradient-to-r from-[#5CA6CE] to-[#5A5B9F] hover:brightness-110 active:scale-[0.98] text-white font-black py-5 rounded-2xl transition-all flex items-center justify-center gap-3 shadow-[0_10px_30px_rgba(92,166,206,0.3)] disabled:opacity-50"
+          className={`w-full bg-gradient-to-r from-[#5CA6CE] to-[#5A5B9F] hover:brightness-110 active:scale-[0.98] text-white font-black py-5 rounded-2xl transition-all flex items-center justify-center gap-3 shadow-[0_10px_30px_rgba(92,166,206,0.3)] disabled:opacity-50 ${enhanced ? 'animate-button-breathe' : ''}`}
         >
           {loading ? (
             <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
