@@ -4,12 +4,12 @@ import { Star, List, Layout, Banknote } from 'lucide-react';
 import { Feature, PainPoint } from './types';
 
 export const COLORS = {
-  background: '#16151D',
+  background: '#050505',
   backgroundPure: '#000000',
   text: '#FFFFFF',
-  primary: '#5CA6CE',
-  secondary: '#5A5B9F',
-  dark: '#263056',
+  primary: '#a78bfa',
+  secondary: '#a78bfa',
+  dark: '#222222',
 };
 
 export const PAIN_POINTS: PainPoint[] = [
@@ -34,16 +34,16 @@ export const FEATURES: Feature[] = [
   {
     title: "상단 고정석 5개",
     description: "시청자 홈에서 가장 소중한 크리에이터 5명을 고정합니다. 찐팬들이 고정을 한다면 노출도 100%",
-    icon: <Star className="text-[#5CA6CE]" size={24} />
+    icon: <Star className="text-[#a78bfa]" size={24} />
   },
   {
     title: "시리즈 기반 리스트",
     description: "영상들이 시리즈별로 묶여 있고, 각 개별 영상을 설명하는 텍스트가 추가되어 썸네일 경쟁이 필요 없습니다.",
-    icon: <List className="text-[#5CA6CE]" size={24} />
+    icon: <List className="text-[#a78bfa]" size={24} />
   },
   {
     title: "내 의도대로 재생목록 정리",
     description: "유튜브 영상을 쉽게 가져오고 내 의도대로 1,2,3화 이어지는 시리즈로 정리해서, 팬이 정주행하기 쉬워집니다.",
-    icon: <Layout className="text-[#5CA6CE]" size={24} />
+    icon: <Layout className="text-[#a78bfa]" size={24} />
   }
 ];

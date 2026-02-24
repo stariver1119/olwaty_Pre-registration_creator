@@ -54,15 +54,15 @@ const EmailForm: React.FC<EmailFormProps> = ({ enhanced = false }) => {
 
   if (submitted) {
     return (
-      <div className={`w-full max-w-sm bg-[#263056]/40 border border-[#5CA6CE]/40 rounded-3xl p-8 text-center animate-in fade-in zoom-in duration-500 backdrop-blur-md ${enhanced ? 'animate-success-ripple' : ''}`}>
-        <div className="w-12 h-12 bg-[#5CA6CE]/20 rounded-full flex items-center justify-center mx-auto mb-4">
-          <CheckCircle2 size={24} className="text-[#5CA6CE]" />
+      <div className={`w-full max-w-sm bg-[#222222]/40 border border-[#a78bfa]/40 rounded-3xl p-8 text-center animate-in fade-in zoom-in duration-500 backdrop-blur-md ${enhanced ? 'animate-success-ripple' : ''}`}>
+        <div className="w-12 h-12 bg-[#a78bfa]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+          <CheckCircle2 size={24} className="text-[#a78bfa]" />
         </div>
-        <h3 className="text-2xl font-black mb-2 text-[#5CA6CE]">신청 완료!</h3>
+        <h3 className="text-2xl font-black mb-2 text-[#a78bfa]">신청 완료!</h3>
         <p className="text-base text-gray-300">소중한 의견 감사합니다.<br />런칭 시 가장 먼저 연락드릴게요.</p>
         <button
           onClick={() => setSubmitted(false)}
-          className="mt-6 text-sm text-[#5A5B9F] hover:text-[#5CA6CE] transition-colors font-medium"
+          className="mt-6 text-sm text-[#a78bfa] hover:text-[#a78bfa] transition-colors font-medium"
         >
           다른 이메일로 등록하기
         </button>
@@ -72,15 +72,15 @@ const EmailForm: React.FC<EmailFormProps> = ({ enhanced = false }) => {
 
   return (
     <div className="w-full max-w-sm flex flex-col items-center">
-      <div className="flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full border border-[#5CA6CE]/30 bg-[#5CA6CE]/5">
-        <Calendar size={14} className="text-[#5CA6CE]" />
-        <span className="text-[12px] font-bold text-[#5CA6CE] tracking-wider uppercase">2026. Coming Soon</span>
+      <div className="flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full border border-[#a78bfa]/30 bg-[#a78bfa]/5">
+        <Calendar size={14} className="text-[#a78bfa]" />
+        <span className="text-[12px] font-bold text-[#a78bfa] tracking-wider uppercase">2026. Coming Soon</span>
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
         <div className="relative group">
           {enhanced && (
-            <div className="absolute inset-0 rounded-2xl border border-[#5CA6CE]/20 pointer-events-none animate-input-sweep" />
+            <div className="absolute inset-0 rounded-2xl border border-[#a78bfa]/20 pointer-events-none animate-input-sweep" />
           )}
           <input
             type="email"
@@ -88,13 +88,13 @@ const EmailForm: React.FC<EmailFormProps> = ({ enhanced = false }) => {
             placeholder="이메일 입력하고 사전 신청하기"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className={`w-full bg-[#1A1924]/80 border border-white/10 rounded-2xl px-6 py-5 outline-none focus:border-[#5CA6CE] focus:ring-4 focus:ring-[#5CA6CE]/10 transition-all text-white placeholder:text-gray-500 text-lg shadow-2xl backdrop-blur-sm ${enhanced ? 'animate-input-glow focus:shadow-[0_0_0_6px_rgba(92,166,206,0.12)]' : ''}`}
+            className={`w-full bg-[#111111]/80 border border-white/10 rounded-2xl px-6 py-5 outline-none focus:border-[#a78bfa] focus:ring-4 focus:ring-[#a78bfa]/10 transition-all text-white placeholder:text-gray-500 text-lg shadow-2xl backdrop-blur-sm ${enhanced ? 'animate-input-glow focus:shadow-[0_0_0_6px_rgba(92,166,206,0.12)]' : ''}`}
           />
         </div>
 
         {/* Checkbox for Tester Participation */}
         <label className="flex items-center gap-3 px-2 cursor-pointer group">
-          <div className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${isTester ? 'bg-[#5CA6CE] border-[#5CA6CE]' : 'border-white/20 group-hover:border-[#5CA6CE]/50'}`}>
+          <div className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${isTester ? 'bg-[#a78bfa] border-[#a78bfa]' : 'border-white/20 group-hover:border-[#a78bfa]/50'}`}>
             {isTester && <CheckCircle2 size={14} className="text-white" />}
           </div>
           <input
@@ -103,7 +103,7 @@ const EmailForm: React.FC<EmailFormProps> = ({ enhanced = false }) => {
             onChange={(e) => setIsTester(e.target.checked)}
             className="hidden"
           />
-          <span className={`text-sm transition-colors ${isTester ? 'text-[#5CA6CE] font-bold' : 'text-gray-400 group-hover:text-gray-300'}`}>
+          <span className={`text-sm transition-colors ${isTester ? 'text-[#a78bfa] font-bold' : 'text-gray-400 group-hover:text-gray-300'}`}>
             테스터 참여에도 관심이 있습니다
           </span>
         </label>
@@ -112,7 +112,7 @@ const EmailForm: React.FC<EmailFormProps> = ({ enhanced = false }) => {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full bg-gradient-to-r from-[#5CA6CE] to-[#5A5B9F] hover:brightness-110 active:scale-[0.98] text-white font-black py-5 rounded-2xl transition-all flex items-center justify-center gap-3 shadow-[0_10px_30px_rgba(92,166,206,0.3)] disabled:opacity-50 ${enhanced ? 'animate-button-breathe' : ''}`}
+          className={`w-full bg-gradient-to-r from-[#a78bfa] to-[#a78bfa] hover:brightness-110 active:scale-[0.98] text-white font-black py-5 rounded-2xl transition-all flex items-center justify-center gap-3 shadow-[0_10px_30px_rgba(92,166,206,0.3)] disabled:opacity-50 ${enhanced ? 'animate-button-breathe' : ''}`}
         >
           {loading ? (
             <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
