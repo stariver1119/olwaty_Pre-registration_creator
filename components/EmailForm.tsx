@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Send, Calendar, CheckCircle2 } from 'lucide-react';
 
 interface EmailFormProps {
@@ -12,6 +11,22 @@ const EmailForm: React.FC<EmailFormProps> = ({ enhanced = false }) => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const buttonRef = useRef<HTMLDivElement>(null);
+  const [magneticPos, setMagneticPos] = useState({ x: 0, y: 0 });
+
+  const handleMagneticMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!buttonRef.current || !enhanced) return;
+    const { clientX, clientY } = e;
+    const { width, height, left, top } = buttonRef.current.getBoundingClientRect();
+    const x = clientX - (left + width / 2);
+    const y = clientY - (top + height / 2);
+    setMagneticPos({ x: x * 0.08, y: y * 0.08 });
+  };
+
+  const handleMagneticLeave = () => {
+    setMagneticPos({ x: 0, y: 0 });
+  };
 
   // Google Apps Script Web App URL from environment variables
   const WEBHOOK_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL || 'YOUR_SCRIPT_ID';
@@ -109,20 +124,34 @@ const EmailForm: React.FC<EmailFormProps> = ({ enhanced = false }) => {
         </label>
 
         {error && <p className="text-red-400 text-xs px-2">{error}</p>}
-        <button
-          type="submit"
-          disabled={loading}
-          className={`w-full bg-gradient-to-r from-[#a78bfa] to-[#a78bfa] hover:brightness-110 active:scale-[0.98] text-white font-black py-5 rounded-2xl transition-all flex items-center justify-center gap-3 shadow-[0_10px_30px_rgba(92,166,206,0.3)] disabled:opacity-50 ${enhanced ? 'animate-button-breathe' : ''}`}
+
+        <div
+          ref={buttonRef}
+          onMouseMove={handleMagneticMove}
+          onMouseLeave={handleMagneticLeave}
+          className="w-full relative z-10"
+          style={
+            magneticPos.x !== 0 || magneticPos.y !== 0
+              ? { transform: `translate(${magneticPos.x}px, ${magneticPos.y}px)`, transition: 'transform 0.15s ease-out' }
+              : { transition: 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)' }
+          }
         >
-          {loading ? (
-            <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-          ) : (
-            <>
-              <span className="text-lg">사전 신청하기</span>
-              <Send size={20} />
-            </>
-          )}
-        </button>
+          <button
+            type="submit"
+            disabled={loading}
+            className={`w-full bg-gradient-to-r from-[#a78bfa] to-[#a78bfa] hover:brightness-110 active:scale-[0.98] text-white font-black py-5 rounded-2xl transition-all flex items-center justify-center gap-3 shadow-[0_10px_30px_rgba(167,139,250,0.3)] disabled:opacity-50 ${enhanced ? 'animate-button-breathe' : ''}`}
+          >
+            {loading ? (
+              <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+            ) : (
+              <>
+                <span className="text-lg">사전 신청하기</span>
+                <Send size={20} />
+              </>
+            )}
+          </button>
+        </div>
+
         <p className="text-[11px] text-gray-400 text-center opacity-70">
           * 입력하신 이메일은 서비스 런칭 알림용으로만 사용됩니다.
         </p>
