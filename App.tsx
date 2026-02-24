@@ -491,7 +491,7 @@ const App: React.FC = () => {
           >
             <div className="w-2.5 h-2.5 rounded-full bg-[#a78bfa] animate-pulse shadow-[0_0_10px_rgba(92,166,206,0.8)]" />
             <span className="text-[11px] font-black text-[#a78bfa] uppercase tracking-[0.25em]">
-              SOON 2026. 03
+              SOON 03.2026
             </span>
           </div>
         </div>
