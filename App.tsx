@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { PAIN_POINTS, FEATURES } from './constants';
 import EmailForm from './components/EmailForm';
+import StaggeredText from './components/StaggeredText';
 import { ArrowDown, Play, Sparkles, Star, Banknote } from 'lucide-react';
 
 type MotionPreset = {
@@ -280,12 +281,12 @@ const App: React.FC = () => {
           </Reveal>
 
           <Reveal enabled={MOTION.revealCards} delay={80} className="w-full">
-            <h1
+            <StaggeredText
+              text="팬과 진짜로 연결되는 순간"
+              enabled={MOTION.revealCards}
+              delay={220}
               className="text-[32px] font-black tracking-tight mb-6 text-glow leading-[1.2] bg-clip-text text-transparent bg-gradient-to-r from-[#a78bfa] to-[#ffffff] animate-heading-unify"
-              style={heroStyle(120)}
-            >
-              팬과 진짜로 연결되는 순간
-            </h1>
+            />
           </Reveal>
 
           <p className="text-gray-400 font-bold text-base tracking-widest mb-12 uppercase" style={heroStyle(240)}>
