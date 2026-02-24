@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { PAIN_POINTS, FEATURES } from './constants';
 import EmailForm from './components/EmailForm';
-import StaggeredText from './components/StaggeredText';
 import { ArrowDown, Play, Sparkles, Star, Banknote } from 'lucide-react';
 
 type MotionPreset = {
@@ -133,6 +132,48 @@ const App: React.FC = () => {
   const [heroReady, setHeroReady] = useState(!MOTION.heroSequence);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
+  // Sequential Video Data
+  const [activeVideoIndex, setActiveVideoIndex] = useState(0);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const progressRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const isTransitioning = useRef(false);
+
+  useEffect(() => {
+    isTransitioning.current = false;
+    videoRefs.current.forEach((video, index) => {
+      if (!video) return;
+      if (index === activeVideoIndex) {
+        video.currentTime = 0;
+        video.play().catch(() => { });
+      } else {
+        video.pause();
+        if (progressRefs.current[index]) {
+          progressRefs.current[index]!.style.width = '0%';
+        }
+      }
+    });
+  }, [activeVideoIndex]);
+
+  const handleVideoTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement>, index: number) => {
+    if (activeVideoIndex !== index) return;
+    const video = e.currentTarget;
+    if (!video.duration) return;
+
+    // Use half of the video's actual duration to skip the end and cycle faster
+    const targetDuration = video.duration / 2;
+
+    if (progressRefs.current[index]) {
+      const currentProgress = Math.min((video.currentTime / targetDuration) * 100, 100);
+      progressRefs.current[index]!.style.width = `${currentProgress}%`;
+    }
+
+    if (!isTransitioning.current && video.currentTime >= targetDuration) {
+      isTransitioning.current = true;
+      video.pause();
+      setActiveVideoIndex((prev) => (prev + 1) % 3);
+    }
+  };
+
   useEffect(() => {
     if (!MOTION.heroSequence) return;
     const timer = window.setTimeout(() => setHeroReady(true), 120);
@@ -243,28 +284,46 @@ const App: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="space-y-5">
-                    {[1, 2, 3].map((i) => (
-                      <div key={i} className="flex gap-4 items-center group cursor-default">
-                        <div className="w-20 h-12 bg-gray-800/60 rounded-xl overflow-hidden relative shadow-inner">
-                          <img
-                            src={`https://picsum.photos/seed/vidhero${i}/200/120`}
-                            alt={`Preview ${i}`}
-                            className={`opacity-30 w-full h-full object-cover transition-transform duration-700 ${MOTION.mockupInteractive ? 'group-hover:scale-110' : ''
-                              }`}
-                          />
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <Play size={14} className="text-white fill-white opacity-40 animate-pulse" />
+                  <div className="space-y-4">
+                    {[1, 2, 3].map((i, index) => (
+                      <div
+                        key={i}
+                        className={`flex gap-4 items-center group cursor-default transition-all duration-300 ${activeVideoIndex === index ? 'opacity-100 scale-[1.02]' : 'opacity-40 hover:opacity-70 scale-100'}`}
+                      >
+                        <div className="w-20 h-12 bg-[#050505] rounded-xl overflow-hidden relative shadow-inner border border-white/5">
+                          {(() => {
+                            const videoUrls = [
+                              "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+                              "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+                              "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"
+                            ];
+                            return (
+                              <video
+                                ref={(el) => { if (el) videoRefs.current[index] = el; }}
+                                src={videoUrls[index]}
+                                muted
+                                playsInline
+                                onTimeUpdate={(e) => handleVideoTimeUpdate(e, index)}
+                                className={`w-full h-full object-cover transition-transform duration-700 ${MOTION.mockupInteractive && activeVideoIndex === index ? 'group-hover:scale-110' : ''}`}
+                              />
+                            );
+                          })()}
+                          <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${activeVideoIndex === index ? 'opacity-0' : 'opacity-100'}`}>
+                            <Play size={14} className="text-white fill-white opacity-40" />
                           </div>
                         </div>
                         <div className="flex-1 space-y-2">
-                          <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden">
-                            <div className={`h-full bg-[#a78bfa]/30 w-1/2 rounded-full ${MOTION.mockupInteractive ? 'animate-progress-sweep' : ''}`} />
+                          <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+                            <div
+                              ref={(el) => { if (el) progressRefs.current[index] = el; }}
+                              className={`h-full ${activeVideoIndex === index ? 'bg-[#a78bfa] shadow-[0_0_10px_rgba(167,139,250,0.8)]' : 'bg-white/20'} rounded-full transition-all duration-75`}
+                              style={{ width: '0%' }}
+                            />
                           </div>
                           <div className="h-1.5 w-1/3 bg-white/5 rounded-full" />
                         </div>
                         <div className="w-8 h-8 rounded-lg bg-white/[0.03] border border-white/5 flex items-center justify-center">
-                          <div className="w-1 h-3 bg-white/10 rounded-full" />
+                          <div className={`w-1 h-3 rounded-full transition-colors duration-300 ${activeVideoIndex === index ? 'bg-[#a78bfa] animate-pulse' : 'bg-white/10'}`} />
                         </div>
                       </div>
                     ))}
@@ -281,12 +340,12 @@ const App: React.FC = () => {
           </Reveal>
 
           <Reveal enabled={MOTION.revealCards} delay={80} className="w-full">
-            <StaggeredText
-              text="팬과 진짜로 연결되는 순간"
-              enabled={MOTION.revealCards}
-              delay={220}
+            <h1
               className="text-[32px] font-black tracking-tight mb-6 text-glow leading-[1.2] bg-clip-text text-transparent bg-gradient-to-r from-[#a78bfa] to-[#ffffff] animate-heading-unify"
-            />
+              style={heroStyle(120)}
+            >
+              팬과 진짜로 연결되는 순간
+            </h1>
           </Reveal>
 
           <p className="text-gray-400 font-bold text-base tracking-widest mb-12 uppercase" style={heroStyle(240)}>
@@ -432,7 +491,7 @@ const App: React.FC = () => {
           >
             <div className="w-2.5 h-2.5 rounded-full bg-[#a78bfa] animate-pulse shadow-[0_0_10px_rgba(92,166,206,0.8)]" />
             <span className="text-[11px] font-black text-[#a78bfa] uppercase tracking-[0.25em]">
-              Launching 2026
+              SOON 2026. 03
             </span>
           </div>
         </div>
