@@ -26,7 +26,7 @@ export const PAIN_POINTS: PainPoint[] = [
   {
     id: "상황 3",
     scenario: "좋은 영상은 다시 찾기 쉬워야 합니다",
-    content: "팬은 정주행하고 싶어해요. 올와티가 그걸 쉽게 만들어줍니다."
+    content: "팬은 팬은 또 보고, 처음부터 보고 싶어해요. 올와티가 그걸 쉽게 만들어줍니다."
   }
 ];
 
