@@ -396,7 +396,7 @@ const App: React.FC = () => {
               <h2 className="text-2xl font-black text-white mb-6 leading-snug animate-heading-unify">
                 시청자가
                 <br />
-                <span className="text-[#a78bfa]"> 진짜 팬</span>이 되는 순간
+                <span className="text-[#a78bfa]"> 진짜 팬</span>이 되는 공간
               </h2>
             </Reveal>
             <div className="h-0.5 w-12 bg-gradient-to-r from-transparent via-[#a78bfa] to-transparent mx-auto" />
